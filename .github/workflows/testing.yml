@@ -1,0 +1,25 @@
+name: testing linux pull ref
+
+on:
+  workflow_dispatch:
+
+jobs:
+  wheels-linux:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout ORE
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        fetch-depth: 0
+        ref: 'v1.8.12.2' 
+    #- name: get QuantLib
+    #  run: |
+    #    git submodule update --init --recursive
+    - name: Set Swap Space
+      uses: pierotofy/set-swap-space@master
+      with:
+        swap-size-gb: 10
+    - name: Install eigen
+      run: |
+        git status
